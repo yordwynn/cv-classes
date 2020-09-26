@@ -71,9 +71,10 @@ class KNearestNeighbor(object):
             for j in range(num_train):
                 #####################################################################
                 # TODO:                                                             #
-                # Compute the l2 distance between the ith test point and the jth    #
-                # training point, and store the result in dists[i, j]. You should   #
-                # not use a loop over dimension, nor use np.linalg.norm().          #
+                # Вычислите L2 расстояние между i-м тестовым изображением и j-m     #
+                # обучающим изображением. Сохраните результат в dists[i, j]. Нельзя #
+                # через цикл перебирать элементы векторов и использовать функцию    #
+                # np.linalg.norm()                                                  #
                 #####################################################################
                 # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -95,9 +96,9 @@ class KNearestNeighbor(object):
         for i in range(num_test):
             #######################################################################
             # TODO:                                                               #
-            # Compute the l2 distance between the ith test point and all training #
-            # points, and store the result in dists[i, :].                        #
-            # Do not use np.linalg.norm().                                        #
+            # Вычислите L2 расситяние между i-м изображением и всеми обучающими   #
+            # изображениями. Сохраните результат в dists[i, :]. Нельзя            #
+            # использовать функцию np.linalg.norm().                              #
             #######################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -118,16 +119,15 @@ class KNearestNeighbor(object):
         dists = np.zeros((num_test, num_train))
         #########################################################################
         # TODO:                                                                 #
-        # Compute the l2 distance between all test points and all training      #
-        # points without using any explicit loops, and store the result in      #
-        # dists.                                                                #
+        # Вычислите L2 расстояние между всеми тестовыми и обучающими            #
+        # изображениями без использования циклов. Сохраните результат в dists.  #
         #                                                                       #
-        # You should implement this function using only basic array operations; #
-        # in particular you should not use functions from scipy,                #
-        # nor use np.linalg.norm().                                             #
+        # Вам нужно реализовать эту функцию только с помощью операций над       #
+        # массивами, нельзя использовать функции из scipy и np.linalg.norm().   #
         #                                                                       #
-        # HINT: Try to formulate the l2 distance using matrix multiplication    #
-        #       and two broadcast sums.                                         #
+        # Подсказка: Подумайте о вычислении L2 нормы через умножение матриц и   #
+        # две "бродкаст" суммы матриц (извините, не знаю, как это грамотно      #
+        # назвать на русском языке).                                            #
         #########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -152,15 +152,14 @@ class KNearestNeighbor(object):
         num_test = dists.shape[0]
         y_pred = np.zeros(num_test)
         for i in range(num_test):
-            # A list of length k storing the labels of the k nearest neighbors to
-            # the ith test point.
+            # Список длины k хранит метки k ближайших соседей к i-му изображению
             closest_y = []
             #########################################################################
             # TODO:                                                                 #
-            # Use the distance matrix to find the k nearest neighbors of the ith    #
-            # testing point, and use self.y_train to find the labels of these       #
-            # neighbors. Store these labels in closest_y.                           #
-            # Hint: Look up the function numpy.argsort.                             #
+            # Используя матрицу расстояний, найдите k ближайших соседей к i-му      #
+            # обучающему изображению и с помощью self.y_train найдите метки этих    #
+            # соседей. Сохраните эти метки в closest_y.append.                      #
+            # Подсказка: используйте функцию numpy.argsort.                         #
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -169,10 +168,9 @@ class KNearestNeighbor(object):
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
             #########################################################################
             # TODO:                                                                 #
-            # Now that you have found the labels of the k nearest neighbors, you    #
-            # need to find the most common label in the list closest_y of labels.   #
-            # Store this label in y_pred[i]. Break ties by choosing the smaller     #
-            # label.                                                                #
+            # Теперь, когда вы нашли метки k ближайших соседей, вам нужно найти     #
+            # саму популярную метку в списке closest_y. Сохраните метку в y_pred[i] #
+            # Если меток равное количество, выбирайте наименьшую по значению.       #
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
