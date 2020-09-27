@@ -3,8 +3,8 @@ from __future__ import print_function
 from builtins import range
 from builtins import object
 import numpy as np
-from cs231n.classifiers.linear_svm import *
-from cs231n.classifiers.softmax import *
+from vision.classifiers.linear_svm import *
+from vision.classifiers.softmax import *
 from past.builtins import xrange
 
 
@@ -33,12 +33,11 @@ class LinearClassifier(object):
         A list containing the value of the loss function at each training iteration.
         """
         num_train, dim = X.shape
-        num_classes = np.max(y) + 1 # assume y takes values 0...K-1 where K is number of classes
+        num_classes = np.max(y) + 1 # y принимает значения от 0 до K-1 где K - это количество классов
         if self.W is None:
-            # lazily initialize W
             self.W = 0.001 * np.random.randn(dim, num_classes)
 
-        # Run stochastic gradient descent to optimize W
+        # Запуск стохастического градиентного спуска для нахождения матрицы W
         loss_history = []
         for it in range(num_iters):
             X_batch = None
@@ -46,14 +45,15 @@ class LinearClassifier(object):
 
             #########################################################################
             # TODO:                                                                 #
-            # Sample batch_size elements from the training data and their           #
-            # corresponding labels to use in this round of gradient descent.        #
-            # Store the data in X_batch and their corresponding labels in           #
-            # y_batch; after sampling X_batch should have shape (batch_size, dim)   #
-            # and y_batch should have shape (batch_size,)                           #
+            # Возьмите batch_size элементов из обучающей выборки и соответствующие  #
+            # им метки классов для того, чтобы использовать на текущей итерации     #
+            # градиентного спуска. Для хранения данных используйте переменную       #
+            # X_batch и для хранине меток используйте переменную y_batch. X_batch   #
+            # должен иметь размерность (batch_size, dim), и y_batch - (batch_size,) #
             #                                                                       #
-            # Hint: Use np.random.choice to generate indices. Sampling with         #
-            # replacement is faster than sampling without replacement.              #
+            # Подсказка: Используйте функцию np.random.choice, чтобы сгенерировать  #
+            # индексы изображений, которые вы будете брать для обучения. Выборка с  #
+            # заменой (смотрите параметры функции) работает быстрее, чем без нее.   #
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -61,14 +61,14 @@ class LinearClassifier(object):
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            # evaluate loss and gradient
+            # вычислите значение функции потерь и градиент
             loss, grad = self.loss(X_batch, y_batch, reg)
             loss_history.append(loss)
 
-            # perform parameter update
+            # обновите значения параметров
             #########################################################################
             # TODO:                                                                 #
-            # Update the weights using the gradient and the learning rate.          #
+            # Измение веса, используя градиент и скорость обучения                  #
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -98,7 +98,7 @@ class LinearClassifier(object):
         y_pred = np.zeros(X.shape[0])
         ###########################################################################
         # TODO:                                                                   #
-        # Implement this method. Store the predicted labels in y_pred.            #
+        # Реализуйте классификацию. Результат сохраните в переменной y_pred.      #
         ###########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
