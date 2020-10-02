@@ -21,7 +21,7 @@ def softmax_loss_naive(W, X, y, reg):
     - loss as single float
     - gradient with respect to weights W; an array of same shape as W
     """
-    # Initialize the loss and gradient to zero.
+    # Инициализируем ошибку и градиент нулями
     loss = 0.0
     dW = np.zeros_like(W)
 
