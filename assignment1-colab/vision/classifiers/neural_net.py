@@ -66,17 +66,17 @@ class TwoLayerNet(object):
         - grads: Dictionary mapping parameter names to gradients of those parameters
           with respect to the loss function; has the same keys as self.params.
         """
-        # Unpack variables from the params dictionary
+        # Распакуем переменные из словаря параметров сети
         W1, b1 = self.params['W1'], self.params['b1']
         W2, b2 = self.params['W2'], self.params['b2']
         N, D = X.shape
 
-        # Compute the forward pass
+        # Вычислим прямой проход
         scores = None
         #############################################################################
-        # TODO: Perform the forward pass, computing the class scores for the input. #
-        # Store the result in the scores variable, which should be an array of      #
-        # shape (N, C).                                                             #
+        # TODO: Реализуйте прямой проход, вычислив оценки для классов входных       #
+        # данных. Сохраните результат в переменной scores, которая должна           #
+        # представлять собой массив формы (N, C).                                   #
         #############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -84,17 +84,18 @@ class TwoLayerNet(object):
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        # If the targets are not given then jump out, we're done
+        # Если нам не известы настоящие метки классов, значит функция закончила свю
+        # работу
         if y is None:
             return scores
 
-        # Compute the loss
+        # Вычислите потерю
         loss = None
         #############################################################################
-        # TODO: Finish the forward pass, and compute the loss. This should include  #
-        # both the data loss and L2 regularization for W1 and W2. Store the result  #
-        # in the variable loss, which should be a scalar. Use the Softmax           #
-        # classifier loss.                                                          #
+        # TODO: Завершите реализацию прямого прохода и вычислите потерю. Функция    #
+        # потерь должна включать также и регуляризацию для параметров W1 и W2.      #
+        # Сохраните результат в переменной loss, которая должна быть скаляром. В    #
+        # качестве функции потерь используйте Softmax.                              #
         #############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -105,9 +106,10 @@ class TwoLayerNet(object):
         # Backward pass: compute gradients
         grads = {}
         #############################################################################
-        # TODO: Compute the backward pass, computing the derivatives of the weights #
-        # and biases. Store the results in the grads dictionary. For example,       #
-        # grads['W1'] should store the gradient on W1, and be a matrix of same size #
+        # TODO: Вычимлите обратный проход и производные параметров сети. Сохраните  #
+        # результаты в словаре для градиентов. Например, grads['W1'] должен хранить #
+        # градиент относительно матрицы параметров W1, и должен быть матрицей той   #
+        # размерности, что и матрица W1                                             #
         #############################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -141,7 +143,7 @@ class TwoLayerNet(object):
         num_train = X.shape[0]
         iterations_per_epoch = max(num_train / batch_size, 1)
 
-        # Use SGD to optimize the parameters in self.model
+        # Используйте градиентный спуск для оптимизации параметров self.model
         loss_history = []
         train_acc_history = []
         val_acc_history = []
@@ -151,8 +153,9 @@ class TwoLayerNet(object):
             y_batch = None
 
             #########################################################################
-            # TODO: Create a random minibatch of training data and labels, storing  #
-            # them in X_batch and y_batch respectively.                             #
+            # TODO: Создайте пакет из случайно выбранных элементов выборки и        #
+            # и соответствующих меток классов, сохраните их в переменные X_batch и  #
+            # y_batch.                             #
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -160,15 +163,14 @@ class TwoLayerNet(object):
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            # Compute loss and gradients using the current minibatch
+            # Вычислите потерю и градиент используя созданный пакет элементов
             loss, grads = self.loss(X_batch, y=y_batch, reg=reg)
             loss_history.append(loss)
 
             #########################################################################
-            # TODO: Use the gradients in the grads dictionary to update the         #
-            # parameters of the network (stored in the dictionary self.params)      #
-            # using stochastic gradient descent. You'll need to use the gradients   #
-            # stored in the grads dictionary defined above.                         #
+            # TODO: Используйте градиенты в словаре grads чтобы изменить параметры  #
+            # сети (которые хранятся в словаре self.params), используя градиентный  #
+            # спуск.                                                                #
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -179,15 +181,16 @@ class TwoLayerNet(object):
             if verbose and it % 100 == 0:
                 print('iteration %d / %d: loss %f' % (it, num_iters, loss))
 
-            # Every epoch, check train and val accuracy and decay learning rate.
+            # Каждую эпоху проверяем точность на обучающей и проверочной выборках и снижаем
+            # скорость обучения
             if it % iterations_per_epoch == 0:
-                # Check accuracy
+                # Проверка точности
                 train_acc = (self.predict(X_batch) == y_batch).mean()
                 val_acc = (self.predict(X_val) == y_val).mean()
                 train_acc_history.append(train_acc)
                 val_acc_history.append(val_acc)
 
-                # Decay learning rate
+                # Уменьшение скорости обучения
                 learning_rate *= learning_rate_decay
 
         return {
@@ -214,7 +217,7 @@ class TwoLayerNet(object):
         y_pred = None
 
         ###########################################################################
-        # TODO: Implement this function; it should be VERY simple!                #
+        # TODO: Реализуйте эту функцию (реализация занимает пару строк)           #
         ###########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
