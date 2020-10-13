@@ -25,12 +25,14 @@ def softmax_loss_naive(W, X, y, reg):
     loss = 0.0
     dW = np.zeros_like(W)
 
-    #############################################################################
-    # TODO: Compute the softmax loss and its gradient using explicit loops.     #
-    # Store the loss in loss and the gradient in dW. If you are not careful     #
-    # here, it is easy to run into numeric instability. Don't forget the        #
-    # regularization!                                                           #
-    #############################################################################
+    #################################################################################
+    # TODO: Вычислите значение функции потерь softmax и ее градиент, используя      #
+    # циклы. Сохраните значение потери в переменной loss и градиент в               #
+    # переменной dW. Вычисления нужно выполнять аккуранто, так как в некоторых      #
+    # случаях функция может вести себя нестабильно (подробнее здесь:                #
+    # https://eli.thegreenplace.net/2016/the-softmax-function-and-its-derivative/). #
+    # Не забывайте о регуляризации.                                                 #
+    #################################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
     pass
@@ -46,15 +48,15 @@ def softmax_loss_vectorized(W, X, y, reg):
 
     Inputs and outputs are the same as softmax_loss_naive.
     """
-    # Initialize the loss and gradient to zero.
+    # Инициализируем ошибку и градиент нулями
     loss = 0.0
     dW = np.zeros_like(W)
 
     #############################################################################
-    # TODO: Compute the softmax loss and its gradient using no explicit loops.  #
-    # Store the loss in loss and the gradient in dW. If you are not careful     #
-    # here, it is easy to run into numeric instability. Don't forget the        #
-    # regularization!                                                           #
+    # TODO: Вычислите значение функции потерь softmax и ее градиент, не         #
+    # используя циклы. Сохраните значение потери в переменной loss и градиент в #
+    # переменной dW. Опять же, нужно помнить, что функция ведет себя            #
+    # нестабильно в некоторых случаях. Также не забывайте про регуляризацию.    #
     #############################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
